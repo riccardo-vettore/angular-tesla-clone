@@ -1,10 +1,29 @@
 import {Component} from '@angular/core';
 import {teslaSections} from './const/tesla-sections';
+import {navbarCenterItems} from './const/navbar-center-items';
+import {navbarRightItems} from './const/navbar-right-items';
 import {TeslaHomeSection} from './model/tesla-home-section';
+import {TeslaNavbarItem} from './model/tesla-navbar-item';
 
 @Component({
     selector: 'app-home',
     template: `
+        <tesla-navbar>
+            <div slot="center">
+                <tesla-navbar-item *ngFor="let centerItem of centerItems"
+                                   [href]="centerItem.href"
+                >
+                    {{centerItem.name}}
+                </tesla-navbar-item>
+            </div>
+            <div slot="right">
+                <tesla-navbar-item *ngFor="let rightItem of rightItems"
+                                   [href]="rightItem.href"
+                >
+                    {{rightItem.name}}
+                </tesla-navbar-item>
+            </div>
+        </tesla-navbar>
         <tesla-home-section *ngFor="let section of sections"
                             [modelName]="section.title"
                             [showSubTitle]="section.showSubTitle"
@@ -27,6 +46,8 @@ import {TeslaHomeSection} from './model/tesla-home-section';
 })
 export class HomeComponent {
     sections: TeslaHomeSection[] = teslaSections;
+    centerItems: TeslaNavbarItem[] = navbarCenterItems;
+    rightItems: TeslaNavbarItem[] = navbarRightItems;
 
     constructor() {
     }
